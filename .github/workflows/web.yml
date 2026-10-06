@@ -1,0 +1,39 @@
+name: Dung trang web Phat Phap Tang
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "30 13 * * *"   # 20:30 gio VN — sau cac khe dang trong ngay, them trang cho tap vua cong khai
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  dung:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.trien-khai.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Dung _site
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+        run: node lam-web.mjs
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: trien-khai
+        uses: actions/deploy-pages@v4
