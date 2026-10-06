@@ -97,7 +97,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:10px}
 
 const khung = ({ tieuDe, moTa, url, than, jsonld = "", anh = `${GOC}/logo.png` }) => `<!doctype html>
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(tieuDe)}</title><meta name="description" content="${esc(moTa)}"><link rel="canonical" href="${url}">
+<title>${esc(tieuDe)}</title><meta name="google-site-verification" content="oooxwV_rr5c1GsUInLzSgfZT_0Dp_1LyYF_66iSCTfA"><meta name="description" content="${esc(moTa)}"><link rel="canonical" href="${url}">
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(tieuDe)}"><meta property="og:description" content="${esc(moTa)}">
 <meta property="og:url" content="${url}"><meta property="og:image" content="${anh}"><meta property="og:locale" content="vi_VN">
 <link rel="icon" href="${GOC}/logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
