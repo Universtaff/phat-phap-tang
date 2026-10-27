@@ -93,7 +93,17 @@ h2{font-size:22px;line-height:1.35;margin:44px 0 6px}
 .nut{display:inline-block;padding:10px 18px;border:1px solid var(--vang);border-radius:999px;text-decoration:none;font-size:16px}
 footer{border-top:1px solid var(--vien);margin-top:56px;padding:24px 0 40px;font-size:15px;color:var(--nhat)}
 footer nav{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:10px}
-:focus-visible{outline:2px solid var(--vang);outline-offset:2px}`;
+:focus-visible{outline:2px solid var(--vang);outline-offset:2px}
+#dong-y{position:fixed;left:12px;right:12px;bottom:12px;max-width:560px;margin:auto;background:var(--be-mat);border:1px solid var(--vien);border-radius:12px;padding:12px 16px;font-size:15px;line-height:1.5;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+#dong-y[hidden]{display:none}#dong-y button{font:inherit;padding:6px 14px;border-radius:999px;border:1px solid var(--vang);background:none;color:inherit;cursor:pointer}`;
+
+// GA4 (tài khoản huuvile1999@, property 560929148). Consent Mode: chưa đồng ý thì không đặt cookie; bấm "Đồng ý" mới bật.
+// Đo lượt bấm sang YouTube = "Lượt nhấp ra ngoài" của Enhanced measurement (mặc định bật), không cần sự kiện riêng.
+const GA = "G-QS0C4TP7LJ";
+const GA_DAU = `<script async src="https://www.googletagmanager.com/gtag/js?id=${GA}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+var c=null;try{c=localStorage.getItem("dong-y-ga")}catch(e){}gtag("consent","default",{analytics_storage:c==="co"?"granted":"denied",ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied"});gtag("js",new Date());gtag("config","${GA}");</script>`;
+const GA_HOI = `<div id="dong-y" hidden>Trang dùng cookie Google Analytics chỉ để đếm lượt xem, không dùng cho quảng cáo.<button data-c="co">Đồng ý</button><button data-c="khong">Không</button></div>
+<script>(function(){var b=document.getElementById("dong-y"),c=null;try{c=localStorage.getItem("dong-y-ga")}catch(e){}if(!c)b.hidden=false;b.onclick=function(e){var v=e.target.dataset&&e.target.dataset.c;if(!v)return;try{localStorage.setItem("dong-y-ga",v)}catch(e){}if(v==="co")gtag("consent","update",{analytics_storage:"granted"});b.hidden=true}})()</script>`;
 
 const khung = ({ tieuDe, moTa, url, than, jsonld = "", anh = `${GOC}/logo.png` }) => `<!doctype html>
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -102,12 +112,12 @@ const khung = ({ tieuDe, moTa, url, than, jsonld = "", anh = `${GOC}/logo.png` }
 <meta property="og:url" content="${url}"><meta property="og:image" content="${anh}"><meta property="og:locale" content="vi_VN">
 <link rel="icon" href="${GOC}/logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap&subset=vietnamese,latin-ext" rel="stylesheet">
-<style>${CSS}</style>${jsonld}</head><body>
+<style>${CSS}</style>${GA_DAU}${jsonld}</head><body>
 <header><div class="khung"><img src="${GOC}/logo.png" alt="" width="44" height="44"><a href="${GOC}/">Phật Pháp Tăng · Theravāda<small>Kể chuyện Đức Phật theo Tam tạng Pāli</small></a></div></header>
 <main class="khung">${than}</main>
 <footer><div class="khung"><nav><a href="${LINK.yt}">YouTube</a><a href="${LINK.fb}">Facebook</a><a href="${LINK.ig}">Instagram</a><a href="${LINK.tt}">TikTok</a></nav>
 Nội dung bám kinh tạng Nikāya và Luật tạng, bản dịch Việt của HT. Thích Minh Châu; chi tiết nào lấy từ chú giải đều ghi rõ là chú giải. Hình ảnh là hiện vật thật và phim thật, không dựng bằng AI.</div></footer>
-</body></html>
+${GA_HOI}</body></html>
 `;
 
 // ---- dựng ----
