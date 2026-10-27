@@ -24,7 +24,7 @@ if (process.argv.includes("--du-lieu")) {
   process.exit(0);
 }
 const LINK = {
-  yt: "https://www.youtube.com/@phatphaptanggz",
+  yt: "https://www.youtube.com/@phatphaptanggz?sub_confirmation=1",   // mở kèm hộp "Đăng ký kênh"
   fb: "https://www.facebook.com/profile.php?id=61594979856647",
   ig: "https://www.instagram.com/phatphaptang.theravada/",
   tt: "https://www.tiktok.com/@quyytambao99",
